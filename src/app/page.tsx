@@ -22,7 +22,6 @@ export default function Home() {
     <>
       <Hero />
       <TrustStrip />
-      <ShopByNiche />
 
       <section className="container-page py-16">
         <div className="mb-8 flex items-end justify-between">
@@ -48,6 +47,7 @@ export default function Home() {
         </Link>
       </section>
 
+      <ShopByNiche />
       <Testimonials />
       <NewsletterStrip />
     </>

@@ -19,8 +19,20 @@ const badgeLabels: Record<string, string> = {
   sale: "Sale",
 };
 
+const badgeOrder = ["sale", "bestseller", "new"];
+
 export function ProductCard({ product }: { product: Product }) {
   const addItem = useCartStore((s) => s.addItem);
+
+  // "Sale" is the stronger signal — drop "Bestseller" when both apply so the
+  // badge row stays compact, and keep "Sale" leftmost when badges do combine.
+  const displayBadges = (
+    product.badges?.includes("sale")
+      ? product.badges.filter((b) => b !== "bestseller")
+      : product.badges
+  )
+    ?.slice()
+    .sort((a, b) => badgeOrder.indexOf(a) - badgeOrder.indexOf(b));
 
   return (
     <div className="group flex flex-col overflow-hidden rounded-3xl bg-surface shadow-card ring-1 ring-border transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover hover:ring-transparent">
@@ -30,9 +42,9 @@ export function ProductCard({ product }: { product: Product }) {
           className="aspect-square w-full transition-transform duration-500 ease-out group-hover:scale-[1.06]"
           iconClassName="h-16 w-16"
         />
-        {product.badges && product.badges.length > 0 && (
-          <div className="absolute left-3 top-3 flex flex-col gap-1.5">
-            {product.badges.map((badge) => (
+        {displayBadges && displayBadges.length > 0 && (
+          <div className="absolute left-3 top-3 flex flex-row gap-1.5">
+            {displayBadges.map((badge) => (
               <span
                 key={badge}
                 className={`rounded-full px-2.5 py-1 text-meta font-semibold shadow-xs ${badgeStyles[badge]}`}

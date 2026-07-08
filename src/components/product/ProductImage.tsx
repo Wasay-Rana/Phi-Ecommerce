@@ -1,29 +1,6 @@
-import {
-  Headphones,
-  BatteryCharging,
-  Watch,
-  Smartphone,
-  Lightbulb,
-  Monitor,
-  Lamp,
-  Sparkles,
-  Blocks,
-  Package,
-} from "lucide-react";
+import Image from "next/image";
 import { ProductCategory } from "@/types/product";
 import { cn } from "@/lib/utils";
-
-const categoryIcon: Record<ProductCategory, typeof Package> = {
-  audio: Headphones,
-  charging: BatteryCharging,
-  wearables: Watch,
-  "phone-accessories": Smartphone,
-  "smart-home": Lightbulb,
-  desk: Monitor,
-  lamps: Lamp,
-  decor: Sparkles,
-  kits: Blocks,
-};
 
 interface ProductImageProps {
   category: ProductCategory;
@@ -33,16 +10,7 @@ interface ProductImageProps {
   style?: React.CSSProperties;
 }
 
-export function ProductImage({
-  category,
-  className,
-  iconClassName,
-  variantIndex = 0,
-  style,
-}: ProductImageProps) {
-  const Icon = categoryIcon[category] ?? Package;
-  const tilt = variantIndex % 2 === 0 ? "" : "scale-x-[-1]";
-
+export function ProductImage({ className, style }: ProductImageProps) {
   return (
     <div
       style={style}
@@ -54,10 +22,13 @@ export function ProductImage({
       <div className="absolute -right-8 -top-10 h-32 w-32 rounded-full bg-accent/40 blur-3xl" />
       <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-accent-dark/15 blur-3xl" />
       <div className="absolute inset-0 ring-1 ring-inset ring-black/3" />
-      <div className="relative flex aspect-square w-[64%] items-center justify-center rounded-full bg-surface/70 shadow-card backdrop-blur-xs">
-        <Icon
-          className={cn("text-primary/75", tilt, iconClassName)}
-          strokeWidth={1.25}
+      <div className="relative h-[78%] w-[78%]">
+        <Image
+          src="/comingSoon.png"
+          alt="Product photo coming soon"
+          fill
+          sizes="(min-width: 1024px) 320px, 50vw"
+          className="object-contain opacity-80 grayscale"
         />
       </div>
     </div>

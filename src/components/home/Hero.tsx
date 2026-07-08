@@ -5,7 +5,13 @@ import { ProductImage } from "@/components/product/ProductImage";
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border bg-bg">
-      <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-accent/25 blur-3xl" />
+      <div
+        className="pointer-events-none absolute -left-40 -top-40 h-[640px] w-[640px]"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(var(--raw-accent-glow), 0.08) 0%, rgba(var(--raw-accent-glow), 0) 65%)",
+        }}
+      />
       <div className="pointer-events-none absolute -right-16 top-1/3 h-64 w-64 rounded-full bg-accent-dark/10 blur-3xl" />
 
       <div className="container-page relative grid items-center gap-10 py-14 md:grid-cols-2 md:py-24">
@@ -14,7 +20,11 @@ export function Hero() {
             Free delivery on orders over Rs. 5,000
           </span>
           <h1 className="text-hero-sm text-primary sm:text-hero md:text-hero-lg text-balance">
-            Everyday tech, <span className="rounded-lg bg-accent px-2 text-accent-text">made better</span>.
+            Everyday tech,{" "}
+            <span className="inline-block rounded-lg bg-accent px-2 py-1 text-accent-text">
+              made better
+            </span>
+            .
           </h1>
           <p className="max-w-md text-base leading-relaxed text-secondary">
             Earbuds, power banks, wearables and desk gear — picked for reliability, priced

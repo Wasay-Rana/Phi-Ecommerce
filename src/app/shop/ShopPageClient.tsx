@@ -11,23 +11,44 @@ import { ShopFilters, PRICE_MAX } from "@/components/shop/ShopFilters";
 import { SortSelect, SortOption } from "@/components/shop/SortSelect";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
+function deriveFiltersFromParams(searchParams: URLSearchParams) {
+  const category = searchParams.get("category") as ProductCategory | null;
+  const niche = searchParams.get("niche") as Niche | null;
+  return {
+    niche: niche ?? (category ? nicheOf[category] : ("all" as const)),
+    categories: category ? [category] : [],
+    query: searchParams.get("q") ?? "",
+  };
+}
+
 export function ShopPageClient() {
   const searchParams = useSearchParams();
-  const initialCategory = searchParams.get("category") as ProductCategory | null;
-  const initialNiche = searchParams.get("niche") as Niche | null;
-  const initialQuery = searchParams.get("q") ?? "";
+  const searchParamsKey = searchParams.toString();
+  const initialFilters = deriveFiltersFromParams(searchParams);
 
   const [loading, setLoading] = useState(true);
-  const [activeNiche, setActiveNiche] = useState<Niche | "all">(
-    initialNiche ?? (initialCategory ? nicheOf[initialCategory] : "all")
-  );
+  const [activeNiche, setActiveNiche] = useState<Niche | "all">(initialFilters.niche);
   const [selectedCategories, setSelectedCategories] = useState<ProductCategory[]>(
-    initialCategory ? [initialCategory] : []
+    initialFilters.categories
   );
-  const [searchQuery, setSearchQuery] = useState(initialQuery);
+  const [searchQuery, setSearchQuery] = useState(initialFilters.query);
   const [maxPrice, setMaxPrice] = useState(PRICE_MAX);
   const [sort, setSort] = useState<SortOption>("featured");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  // Re-derive filters from the URL whenever it changes — including client-side
+  // navigations to /shop with a different query string, which don't remount
+  // this component and so wouldn't otherwise pick up the new value. Adjusting
+  // state during render (rather than in an effect) is the React-recommended
+  // pattern for this: https://react.dev/learn/you-might-not-need-an-effect
+  const [syncedParamsKey, setSyncedParamsKey] = useState(searchParamsKey);
+  if (searchParamsKey !== syncedParamsKey) {
+    setSyncedParamsKey(searchParamsKey);
+    const next = deriveFiltersFromParams(searchParams);
+    setActiveNiche(next.niche);
+    setSelectedCategories(next.categories);
+    setSearchQuery(next.query);
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 500);

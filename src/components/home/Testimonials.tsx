@@ -22,6 +22,20 @@ const testimonials = [
       "The fitness watch screen is genuinely visible in sunlight, unlike my old one. Customer support replied on WhatsApp within minutes.",
     rating: 4,
   },
+  {
+    name: "Rimza T.",
+    city: "Faisalabad",
+    quote:
+      "Got the Luna moon lamp for my daughter's room and the print detail is incredible up close. Shipping to Faisalabad only took three days.",
+    rating: 5,
+  },
+  {
+    name: "Hamza N.",
+    city: "Sukkur",
+    quote:
+      "Wasn't sure a store like this would deliver properly out here, but the CircuitCraft kit arrived in perfect condition and my son finished his first robot build in a weekend.",
+    rating: 5,
+  },
 ];
 
 export function Testimonials() {
