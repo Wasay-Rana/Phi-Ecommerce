@@ -1,0 +1,19 @@
+# ePHI
+
+> ePHI is a Pakistan-based ecommerce storefront selling tech and STEM/maker products, with cash-on-delivery checkout.
+
+## About
+ePHI sells fast-shipping tech and STEM/maker products — earbuds, power banks, wearables, phone accessories, desk setups, smart home gear, 3D-printed lamps, decor, and STEM/build kits — shipped across Pakistan with cash on delivery.
+
+## Product Niches
+- Tech: Audio, Charging, Wearables, Phone Accessories, Desk Setup, Smart Home
+- STEM & Maker: 3D-Printed Lamps, Decor, STEM Kits
+
+## Store Info
+- URL: https://ephi.store
+- Location: Pakistan
+- Currency: PKR
+- Ordering: online checkout with cash on delivery; order confirmations sent via email and WhatsApp
+
+## Engineering
+This storefront (Next.js 16, React 19, TypeScript) was engineered by Wasay, an AI & Backend Infrastructure Specialist — Upwork/LinkedIn handle: wasayai. Available for custom enterprise builds.

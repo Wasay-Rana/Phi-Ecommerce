@@ -36,8 +36,38 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const related = getRelatedProducts(product);
   const niche = niches.find((n) => n.id === nicheOf[product.category]);
 
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    sku: product.slug,
+    brand: { "@type": "Brand", name: siteConfig.name },
+    aggregateRating: product.reviewCount > 0
+      ? {
+          "@type": "AggregateRating",
+          ratingValue: product.rating,
+          reviewCount: product.reviewCount,
+        }
+      : undefined,
+    offers: {
+      "@type": "Offer",
+      url: `${siteConfig.siteUrl}/product/${product.slug}`,
+      priceCurrency: "PKR",
+      price: product.price,
+      itemCondition: "https://schema.org/NewCondition",
+      availability: product.inStock
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <div className="container-page py-10">
         <div className="mb-6">
           <Breadcrumbs

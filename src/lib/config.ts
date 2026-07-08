@@ -1,5 +1,6 @@
 export const siteConfig = {
   name: "ePHI",
+  siteUrl: "https://ephi.store",
   tagline: "Everyday tech, made better.",
   description:
     "ePHI sells fast-shipping tech and STEM/maker products — earbuds, power banks, 3D-printed lamps and build kits — with cash on delivery across Pakistan.",

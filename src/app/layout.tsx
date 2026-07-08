@@ -14,8 +14,20 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.siteUrl),
   title: `${siteConfig.name} — ${siteConfig.tagline}`,
   description: siteConfig.description,
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "OnlineStore",
+  name: siteConfig.name,
+  url: siteConfig.siteUrl,
+  description: siteConfig.description,
+  email: siteConfig.contactEmail,
+  areaServed: "PK",
+  sameAs: Object.values(siteConfig.social),
 };
 
 export default function RootLayout({
@@ -26,6 +38,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <Header />
         <main className="min-h-[60vh]">{children}</main>
         <Footer />
