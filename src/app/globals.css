@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Base */
+  --color-bg: #FAFAF7;
+  --color-bg-alt: #F1F1EC;
+  --color-surface: #FFFFFF;
+  --color-border: #E7E7E1;
+
+  /* Text */
+  --color-text-primary: #15160F;
+  --color-text-secondary: #63645C;
+  --color-text-inverse: #FFFFFF;
+
+  /* Accent - Lime */
+  --color-accent: #C7F536;
+  --color-accent-hover: #AEDA22;
+  --color-accent-dark: #7D9E18;
+  --color-accent-soft: #EEFAC8;
+  --color-accent-text: #15160F;
+  --color-accent-glow: 199, 245, 54;
+
+  /* Status */
+  --color-success: #2E7D32;
+  --color-error: #D32F2F;
+  --color-warning: #ED6C02;
+
+  /* Shadows (rgb triplets, composed with alpha in box-shadow) */
+  --shadow-ink: 21, 22, 15;
+
+  /* Dark mode-ready */
+  --color-dark-bg: #121212;
+  --color-dark-surface: #1E1E1E;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-bg-alt);
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  animation: shimmer 1.6s infinite;
+}
