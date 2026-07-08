@@ -1,14 +1,13 @@
 "use client";
 
-import { ProductCategory } from "@/types/product";
-import { categoryLabels } from "@/data/products";
+import { Niche, ProductCategory } from "@/types/product";
+import { categoriesByNiche, categoryLabels, niches } from "@/data/products";
 import { formatPrice } from "@/lib/utils";
-
-const categories = Object.keys(categoryLabels) as ProductCategory[];
 
 export const PRICE_MAX = 12000;
 
 interface ShopFiltersProps {
+  activeNiche: Niche | "all";
   selectedCategories: ProductCategory[];
   onToggleCategory: (category: ProductCategory) => void;
   maxPrice: number;
@@ -17,12 +16,15 @@ interface ShopFiltersProps {
 }
 
 export function ShopFilters({
+  activeNiche,
   selectedCategories,
   onToggleCategory,
   maxPrice,
   onMaxPriceChange,
   onReset,
 }: ShopFiltersProps) {
+  const nicheGroups = activeNiche === "all" ? niches : niches.filter((n) => n.id === activeNiche);
+
   return (
     <aside className="flex flex-col gap-8">
       <div className="flex items-center justify-between">
@@ -36,18 +38,24 @@ export function ShopFilters({
         </button>
       </div>
 
-      <div className="flex flex-col gap-3">
-        <h4 className="text-sm font-semibold text-primary">Category</h4>
-        {categories.map((category) => (
-          <label key={category} className="flex items-center gap-2 text-sm text-secondary">
-            <input
-              type="checkbox"
-              checked={selectedCategories.includes(category)}
-              onChange={() => onToggleCategory(category)}
-              className="h-4 w-4 rounded border-border accent-[color:var(--color-accent)]"
-            />
-            {categoryLabels[category]}
-          </label>
+      <div className="flex flex-col gap-5">
+        {nicheGroups.map((niche) => (
+          <div key={niche.id} className="flex flex-col gap-3">
+            <h4 className="text-meta font-semibold uppercase tracking-wide text-secondary">
+              {niche.label}
+            </h4>
+            {categoriesByNiche[niche.id].map((category) => (
+              <label key={category} className="flex items-center gap-2 text-sm text-secondary">
+                <input
+                  type="checkbox"
+                  checked={selectedCategories.includes(category)}
+                  onChange={() => onToggleCategory(category)}
+                  className="h-4 w-4 rounded border-border accent-[color:var(--color-accent)]"
+                />
+                {categoryLabels[category]}
+              </label>
+            ))}
+          </div>
         ))}
       </div>
 

@@ -1,11 +1,12 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { Star, ShieldCheck, Truck } from "lucide-react";
-import { getProductBySlug, getRelatedProducts, products } from "@/data/products";
+import { categoryLabels, getProductBySlug, getRelatedProducts, niches, nicheOf, products } from "@/data/products";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { AddToCartPanel } from "@/components/product/AddToCartPanel";
 import { ProductTabs } from "@/components/product/ProductTabs";
 import { RelatedProducts } from "@/components/product/RelatedProducts";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { formatPrice } from "@/lib/utils";
 
 export function generateStaticParams() {
@@ -26,10 +27,22 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   if (!product) notFound();
 
   const related = getRelatedProducts(product);
+  const niche = niches.find((n) => n.id === nicheOf[product.category]);
 
   return (
     <>
       <div className="container-page py-10">
+        <div className="mb-6">
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Shop", href: "/shop" },
+              ...(niche ? [{ label: niche.label, href: `/shop?niche=${niche.id}` }] : []),
+              { label: categoryLabels[product.category], href: `/shop?category=${product.category}` },
+              { label: product.name },
+            ]}
+          />
+        </div>
         <div className="grid gap-10 md:grid-cols-2">
           <ProductGallery category={product.category} images={product.images} />
 

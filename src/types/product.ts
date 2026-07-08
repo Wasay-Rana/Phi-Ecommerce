@@ -1,9 +1,17 @@
+export type Niche = "tech" | "stem";
+
 export type ProductCategory =
+  // Tech
   | "audio"
   | "charging"
   | "wearables"
   | "phone-accessories"
-  | "smart-home";
+  | "smart-home"
+  | "desk"
+  // STEM
+  | "lamps"
+  | "decor"
+  | "kits";
 
 export type ProductBadge = "new" | "bestseller" | "sale";
 

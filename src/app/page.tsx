@@ -2,19 +2,27 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Hero } from "@/components/home/Hero";
 import { TrustStrip } from "@/components/home/TrustStrip";
+import { ShopByNiche } from "@/components/home/ShopByNiche";
 import { Testimonials } from "@/components/home/Testimonials";
 import { NewsletterStrip } from "@/components/home/NewsletterStrip";
 import { ProductGrid } from "@/components/product/ProductGrid";
-import { products } from "@/data/products";
+import { products, niches, getProductsByNiche } from "@/data/products";
 
 export default function Home() {
-  const featured = products.filter((p) => p.badges?.includes("bestseller")).slice(0, 4);
-  const featuredProducts = featured.length >= 4 ? featured : products.slice(0, 4);
+  const featuredProducts = niches.flatMap((niche) =>
+    getProductsByNiche(niche.id)
+      .filter((p) => p.badges?.includes("bestseller"))
+      .slice(0, 2)
+  );
+  if (featuredProducts.length < 4) {
+    featuredProducts.push(...products.slice(0, 4 - featuredProducts.length));
+  }
 
   return (
     <>
       <Hero />
       <TrustStrip />
+      <ShopByNiche />
 
       <section className="container-page py-16">
         <div className="mb-8 flex items-end justify-between">

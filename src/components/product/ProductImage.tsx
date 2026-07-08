@@ -4,6 +4,10 @@ import {
   Watch,
   Smartphone,
   Lightbulb,
+  Monitor,
+  Lamp,
+  Sparkles,
+  Blocks,
   Package,
 } from "lucide-react";
 import { ProductCategory } from "@/types/product";
@@ -15,6 +19,10 @@ const categoryIcon: Record<ProductCategory, typeof Package> = {
   wearables: Watch,
   "phone-accessories": Smartphone,
   "smart-home": Lightbulb,
+  desk: Monitor,
+  lamps: Lamp,
+  decor: Sparkles,
+  kits: Blocks,
 };
 
 interface ProductImageProps {

@@ -1,4 +1,4 @@
-import { Product } from "@/types/product";
+import { Niche, Product, ProductCategory } from "@/types/product";
 
 export const products: Product[] = [
   {
@@ -187,7 +187,7 @@ export const products: Product[] = [
     ],
     price: 8999,
     compareAtPrice: 10999,
-    category: "phone-accessories",
+    category: "desk",
     badges: ["sale", "bestseller"],
     images: ["1", "2", "3"],
     colorVariants: [
@@ -211,11 +211,187 @@ export const products: Product[] = [
       { label: "Mount", value: "Universal monitor clip" },
     ],
     price: 3299,
-    category: "phone-accessories",
+    category: "desk",
     images: ["1", "2"],
     rating: 4.1,
     reviewCount: 34,
     inStock: false,
+  },
+  {
+    slug: "arclight-led-desk-lamp",
+    name: "ArcLight LED Desk Lamp",
+    tagline: "Adjustable brightness, built-in USB charging",
+    description:
+      "ArcLight is a fully articulating desk lamp with stepless brightness and color temperature dials, plus a USB-A port built into the base so your phone charges without another adapter on the desk. The arm holds any angle without drifting.",
+    specs: [
+      { label: "Brightness levels", value: "Stepless dial, 200–800 lumens" },
+      { label: "Color temperature", value: "3000K–6500K adjustable" },
+      { label: "USB port", value: "5W USB-A, built into base" },
+      { label: "Arm", value: "Fully articulating, 3 pivot joints" },
+    ],
+    price: 3499,
+    category: "desk",
+    badges: ["new"],
+    images: ["1", "2"],
+    rating: 4.5,
+    reviewCount: 41,
+    inStock: true,
+  },
+  {
+    slug: "luna-3d-moon-lamp",
+    name: "Luna 3D Moon Lamp",
+    tagline: "3D-printed lunar surface, touch-dimmable",
+    description:
+      "Luna is 3D-printed layer by layer from real NASA topography data, so every crater and ridge is textured, not just printed on. The touch base cycles warm-to-cool white and holds a charge for up to 12 hours on the included wireless stand.",
+    specs: [
+      { label: "Diameter", value: "15cm" },
+      { label: "Print detail", value: "3D-textured lunar topography" },
+      { label: "Light modes", value: "Touch-dimmable, warm to cool white" },
+      { label: "Battery", value: "12h runtime, wireless charging stand included" },
+    ],
+    price: 2799,
+    category: "lamps",
+    badges: ["bestseller"],
+    images: ["1", "2"],
+    rating: 4.7,
+    reviewCount: 98,
+    inStock: true,
+  },
+  {
+    slug: "prism-geometric-lamp",
+    name: "Prism Geometric Lamp",
+    tagline: "Faceted 3D-printed ambient light",
+    description:
+      "A low-poly geometric shade 3D-printed in a single piece, casting a faceted shadow pattern across the room. Three preset scenes cover reading, ambient, and party modes, with a memory function that restores your last setting.",
+    specs: [
+      { label: "Material", value: "3D-printed PLA, faceted shade" },
+      { label: "Modes", value: "Reading / Ambient / Party scenes" },
+      { label: "Power", value: "USB-C, 5W" },
+      { label: "Height", value: "22cm" },
+    ],
+    price: 2299,
+    category: "lamps",
+    badges: ["new"],
+    images: ["1", "2"],
+    rating: 4.4,
+    reviewCount: 37,
+    inStock: true,
+  },
+  {
+    slug: "nova-constellation-projector",
+    name: "Nova Constellation Projector",
+    tagline: "Star-field projection lamp for desk or ceiling",
+    description:
+      "Nova projects a slowly rotating star field across your ceiling, mapped from real constellations rather than random dots. Built for late-night study sessions and stargazing without the light pollution.",
+    specs: [
+      { label: "Projection", value: "Real constellation mapping, rotating" },
+      { label: "Coverage", value: "Up to 4m ceiling projection" },
+      { label: "Timer", value: "1h / 2h auto-off" },
+      { label: "Power", value: "USB-C, 5W" },
+    ],
+    price: 3199,
+    category: "lamps",
+    images: ["1", "2"],
+    rating: 4.5,
+    reviewCount: 62,
+    inStock: true,
+  },
+  {
+    slug: "helix-desk-planter",
+    name: "Helix Desk Planter",
+    tagline: "3D-printed self-watering geometric planter",
+    description:
+      "Helix's spiral wall holds a water reservoir at the base, wicking moisture up to the roots so small succulents and herbs go up to two weeks between refills. The geometric shell is printed as a single piece with no seams to leak.",
+    specs: [
+      { label: "Material", value: "3D-printed PETG, single piece" },
+      { label: "Watering", value: "Self-wicking reservoir, ~2 weeks" },
+      { label: "Size", value: "10cm diameter, fits small succulents/herbs" },
+      { label: "Drainage", value: "Sealed reservoir, no leaks" },
+    ],
+    price: 1499,
+    category: "decor",
+    images: ["1", "2"],
+    rating: 4.3,
+    reviewCount: 29,
+    inStock: true,
+  },
+  {
+    slug: "origami-wall-art-set",
+    name: "Origami Wall Art Set",
+    tagline: "Modular 3D-printed geometric wall panels",
+    description:
+      "A set of six modular panels that click together into whatever pattern fits your wall — a honeycomb grid, a scattered cluster, or a single accent piece. No two setups look the same, and pieces snap on and off without adhesive.",
+    specs: [
+      { label: "Set size", value: "6 modular panels" },
+      { label: "Material", value: "3D-printed matte PLA" },
+      { label: "Mounting", value: "Snap-fit, no adhesive residue" },
+      { label: "Layout", value: "Fully reconfigurable" },
+    ],
+    price: 2199,
+    category: "decor",
+    badges: ["new"],
+    images: ["1", "2"],
+    rating: 4.6,
+    reviewCount: 18,
+    inStock: true,
+  },
+  {
+    slug: "circuitcraft-robotics-kit",
+    name: "CircuitCraft Robotics Kit",
+    tagline: "Build & code your first robot, no experience needed",
+    description:
+      "CircuitCraft walks beginners through building a working robot across 8 guided projects, from a line-follower to an obstacle-avoiding rover. The companion app teaches block-based coding first, with a path into real Python once you're ready.",
+    specs: [
+      { label: "Projects included", value: "8 guided builds" },
+      { label: "Coding", value: "Block-based + Python (companion app)" },
+      { label: "Recommended age", value: "10+" },
+      { label: "Reusable parts", value: "Yes, rebuild into new designs" },
+    ],
+    price: 5999,
+    category: "kits",
+    badges: ["bestseller"],
+    images: ["1", "2", "3"],
+    rating: 4.7,
+    reviewCount: 52,
+    inStock: true,
+  },
+  {
+    slug: "solarbot-mini-kit",
+    name: "SolarBot Mini Kit",
+    tagline: "Solar-powered DIY robot, snap-together build",
+    description:
+      "No batteries, no soldering — SolarBot runs entirely on a built-in solar panel and snaps together in under 20 minutes. A gentle introduction to circuits and renewable energy that actually moves once it's built.",
+    specs: [
+      { label: "Power", value: "Built-in solar panel, no batteries" },
+      { label: "Build time", value: "~20 minutes, no tools" },
+      { label: "Recommended age", value: "8+" },
+      { label: "Skills", value: "Basic circuits, solar energy" },
+    ],
+    price: 1899,
+    category: "kits",
+    images: ["1", "2"],
+    rating: 4.4,
+    reviewCount: 44,
+    inStock: true,
+  },
+  {
+    slug: "gyro-balance-kube",
+    name: "Gyro Balance Kube",
+    tagline: "Desk-toy gyroscope teaching angular momentum",
+    description:
+      "Half fidget toy, half physics demo — Gyro Balance Kube houses a spinning gyroscope inside a clear cube that resists being tilted or turned. Genuinely satisfying to hold, and a real conversation starter on a desk.",
+    specs: [
+      { label: "Spin time", value: "Up to 8 minutes per pull-cord spin" },
+      { label: "Material", value: "Aircraft-grade aluminum rotor, acrylic shell" },
+      { label: "Concept demonstrated", value: "Angular momentum / gyroscopic precession" },
+      { label: "Size", value: "5cm cube" },
+    ],
+    price: 1299,
+    category: "kits",
+    images: ["1"],
+    rating: 4.6,
+    reviewCount: 71,
+    inStock: true,
   },
 ];
 
@@ -230,10 +406,40 @@ export function getRelatedProducts(product: Product, limit = 4): Product[] {
     .slice(0, limit);
 }
 
-export const categoryLabels: Record<Product["category"], string> = {
+export const categoryLabels: Record<ProductCategory, string> = {
   audio: "Audio",
   charging: "Charging",
   wearables: "Wearables",
   "phone-accessories": "Phone Accessories",
   "smart-home": "Smart Home",
+  desk: "Desk Setup",
+  lamps: "3D-Printed Lamps",
+  decor: "Decor",
+  kits: "STEM Kits",
 };
+
+export const niches: { id: Niche; label: string; tagline: string }[] = [
+  { id: "tech", label: "Tech", tagline: "Everyday electronics & desk gear" },
+  { id: "stem", label: "STEM & Maker", tagline: "3D-printed lamps, decor & build kits" },
+];
+
+export const nicheOf: Record<ProductCategory, Niche> = {
+  audio: "tech",
+  charging: "tech",
+  wearables: "tech",
+  "phone-accessories": "tech",
+  "smart-home": "tech",
+  desk: "tech",
+  lamps: "stem",
+  decor: "stem",
+  kits: "stem",
+};
+
+export const categoriesByNiche: Record<Niche, ProductCategory[]> = {
+  tech: ["audio", "charging", "wearables", "phone-accessories", "desk", "smart-home"],
+  stem: ["lamps", "decor", "kits"],
+};
+
+export function getProductsByNiche(niche: Niche): Product[] {
+  return products.filter((p) => nicheOf[p.category] === niche);
+}
