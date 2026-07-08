@@ -1,26 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from "lucide-react";
 import { useCartStore, cartSubtotal } from "@/store/cart";
 import { getProductBySlug } from "@/data/products";
 import { formatPrice } from "@/lib/utils";
+import { useHasMounted } from "@/lib/useHasMounted";
 import { ProductImage } from "@/components/product/ProductImage";
 import { siteConfig } from "@/lib/config";
 
 export default function CartPage() {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useHasMounted();
   const items = useCartStore((s) => s.items);
   const setQuantity = useCartStore((s) => s.setQuantity);
   const removeItem = useCartStore((s) => s.removeItem);
 
-  useEffect(() => setMounted(true), []);
-
   if (!mounted) {
     return (
       <div className="container-page py-10">
-        <div className="skeleton h-8 w-48 rounded" />
+        <div className="skeleton h-8 w-48 rounded-sm" />
       </div>
     );
   }

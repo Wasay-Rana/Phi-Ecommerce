@@ -1,18 +1,18 @@
 export const siteConfig = {
-  name: "Phi",
+  name: "ePHI",
   tagline: "Everyday tech, made better.",
   description:
-    "Phi sells fast-shipping tech accessories — earbuds, power banks, wearables and desk gear — with cash on delivery across Pakistan.",
+    "ePHI sells fast-shipping tech and STEM/maker products — earbuds, power banks, 3D-printed lamps and build kits — with cash on delivery across Pakistan.",
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "923032823122",
   currency: "Rs.",
   shippingFee: 200,
   freeShippingThreshold: 5000,
   social: {
-    instagram: "https://instagram.com/phi.store",
-    tiktok: "https://tiktok.com/@phi.store",
-    facebook: "https://facebook.com/phi.store",
+    instagram: "https://instagram.com/ephi.store",
+    tiktok: "https://tiktok.com/@ephi.store",
+    facebook: "https://facebook.com/ephi.store",
   },
-  contactEmail: "hello@phi.store",
+  contactEmail: "hello@ephi.store",
 };
 
 export function whatsappLink(message?: string) {

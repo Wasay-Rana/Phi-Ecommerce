@@ -2,10 +2,11 @@ import { Suspense } from "react";
 import { Metadata } from "next";
 import { ShopPageClient } from "./ShopPageClient";
 import { ProductGridSkeleton } from "@/components/product/ProductGridSkeleton";
+import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "Shop — Phi",
-  description: "Browse Phi's full range of tech accessories.",
+  title: `Shop — ${siteConfig.name}`,
+  description: `Browse ${siteConfig.name}'s full range of tech and STEM/maker products.`,
 };
 
 export default function ShopPage() {

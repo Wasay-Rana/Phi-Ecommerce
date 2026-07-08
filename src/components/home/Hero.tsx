@@ -40,7 +40,7 @@ export function Hero() {
         <div className="relative">
           <ProductImage
             category="audio"
-            className="aspect-square w-full rounded-[2rem] shadow-card-hover"
+            className="aspect-square w-full rounded-4xl shadow-card-hover"
             iconClassName="h-32 w-32 sm:h-40 sm:w-40"
           />
           <div className="absolute -bottom-5 -left-5 flex items-center gap-3 rounded-2xl bg-surface px-4 py-3 shadow-card-hover ring-1 ring-border sm:-left-8">

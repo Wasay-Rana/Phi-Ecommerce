@@ -50,7 +50,7 @@ export function ShopFilters({
                   type="checkbox"
                   checked={selectedCategories.includes(category)}
                   onChange={() => onToggleCategory(category)}
-                  className="h-4 w-4 rounded border-border accent-[color:var(--color-accent)]"
+                  className="h-4 w-4 rounded-sm border-border accent-accent"
                 />
                 {categoryLabels[category]}
               </label>
@@ -68,7 +68,7 @@ export function ShopFilters({
           step={100}
           value={maxPrice}
           onChange={(e) => onMaxPriceChange(Number(e.target.value))}
-          className="w-full accent-[color:var(--color-accent)]"
+          className="w-full accent-accent"
         />
         <span className="text-sm text-secondary">Up to {formatPrice(maxPrice)}</span>
       </div>

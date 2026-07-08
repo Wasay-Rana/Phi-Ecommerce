@@ -90,7 +90,7 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-surface/90 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-border bg-surface/90 backdrop-blur-sm">
       <div className="container-page flex h-16 items-center justify-between gap-4">
         <Link href="/" className="shrink-0 text-xl font-bold tracking-tight text-primary">
           {siteConfig.name}
@@ -138,7 +138,7 @@ export function Header() {
                   onChange={(e) => setSearchValue(e.target.value)}
                   onBlur={() => !searchValue && setSearchOpen(false)}
                   placeholder="Search products…"
-                  className="w-48 rounded-full border border-border bg-bg-alt px-4 py-2 text-sm text-primary outline-none focus:ring-2 focus:ring-accent"
+                  className="w-48 rounded-full border border-border bg-bg-alt px-4 py-2 text-sm text-primary outline-hidden focus:ring-2 focus:ring-accent"
                 />
               </form>
             ) : (
@@ -187,7 +187,7 @@ export function Header() {
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               placeholder="Search products…"
-              className="w-full rounded-full border border-border bg-bg-alt py-2.5 pl-10 pr-4 text-sm text-primary outline-none focus:ring-2 focus:ring-accent"
+              className="w-full rounded-full border border-border bg-bg-alt py-2.5 pl-10 pr-4 text-sm text-primary outline-hidden focus:ring-2 focus:ring-accent"
             />
           </form>
 

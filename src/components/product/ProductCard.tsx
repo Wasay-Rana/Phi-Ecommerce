@@ -35,7 +35,7 @@ export function ProductCard({ product }: { product: Product }) {
             {product.badges.map((badge) => (
               <span
                 key={badge}
-                className={`rounded-full px-2.5 py-1 text-meta font-semibold shadow-sm ${badgeStyles[badge]}`}
+                className={`rounded-full px-2.5 py-1 text-meta font-semibold shadow-xs ${badgeStyles[badge]}`}
               >
                 {badgeLabels[badge]}
               </span>

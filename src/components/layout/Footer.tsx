@@ -82,11 +82,11 @@ export function Footer() {
         <div className="container-page flex flex-col items-center justify-between gap-3 py-5 text-meta text-secondary sm:flex-row">
           <span>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</span>
           <div className="flex items-center gap-3">
-            <span className="rounded border border-border bg-surface px-2 py-1">COD</span>
-            <span className="rounded border border-border bg-surface px-2 py-1">JazzCash</span>
-            <span className="rounded border border-border bg-surface px-2 py-1">EasyPaisa</span>
-            <span className="rounded border border-border bg-surface px-2 py-1">TCS</span>
-            <span className="rounded border border-border bg-surface px-2 py-1">Leopards</span>
+            <span className="rounded-sm border border-border bg-surface px-2 py-1">COD</span>
+            <span className="rounded-sm border border-border bg-surface px-2 py-1">JazzCash</span>
+            <span className="rounded-sm border border-border bg-surface px-2 py-1">EasyPaisa</span>
+            <span className="rounded-sm border border-border bg-surface px-2 py-1">TCS</span>
+            <span className="rounded-sm border border-border bg-surface px-2 py-1">Leopards</span>
           </div>
         </div>
       </div>

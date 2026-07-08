@@ -7,6 +7,7 @@ import { useCartStore, cartSubtotal } from "@/store/cart";
 import { useOrderStore, generateOrderId } from "@/store/order";
 import { sendOrderEmail } from "@/lib/emailjs";
 import { formatPrice } from "@/lib/utils";
+import { useHasMounted } from "@/lib/useHasMounted";
 import { siteConfig } from "@/lib/config";
 import { getProductBySlug } from "@/data/products";
 import { ProductImage } from "@/components/product/ProductImage";
@@ -31,7 +32,7 @@ const initialForm: FormState = {
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useHasMounted();
   const items = useCartStore((s) => s.items);
   const clearCart = useCartStore((s) => s.clearCart);
   const setLastOrder = useOrderStore((s) => s.setLastOrder);
@@ -40,8 +41,6 @@ export default function CheckoutPage() {
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [submitting, setSubmitting] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
-
-  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (mounted && items.length === 0 && !orderPlaced) {
@@ -184,14 +183,14 @@ export default function CheckoutPage() {
               ).map((method) => (
                 <label
                   key={method.id}
-                  className="flex cursor-pointer items-center gap-3 rounded-xl border border-border p-4 has-[:checked]:border-accent has-[:checked]:bg-accent-soft"
+                  className="flex cursor-pointer items-center gap-3 rounded-xl border border-border p-4 has-checked:border-accent has-checked:bg-accent-soft"
                 >
                   <input
                     type="radio"
                     name="paymentMethod"
                     checked={form.paymentMethod === method.id}
                     onChange={() => updateField("paymentMethod", method.id)}
-                    className="h-4 w-4 accent-[color:var(--color-accent)]"
+                    className="h-4 w-4 accent-accent"
                   />
                   <div>
                     <p className="text-sm font-medium text-primary">{method.label}</p>
@@ -269,7 +268,7 @@ export default function CheckoutPage() {
 function inputClass(hasError: boolean) {
   return `w-full rounded-xl border ${
     hasError ? "border-error" : "border-border"
-  } bg-surface px-4 py-3 text-sm text-primary outline-none focus:ring-2 focus:ring-accent`;
+  } bg-surface px-4 py-3 text-sm text-primary outline-hidden focus:ring-2 focus:ring-accent`;
 }
 
 function Field({

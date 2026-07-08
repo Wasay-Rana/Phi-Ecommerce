@@ -1,63 +1,135 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
   /* Base */
-  --color-bg: #FAFAF7;
-  --color-bg-alt: #F1F1EC;
-  --color-surface: #FFFFFF;
-  --color-border: #E7E7E1;
+  --raw-bg: #fafaf7;
+  --raw-bg-alt: #f1f1ec;
+  --raw-surface: #ffffff;
+  --raw-border: #e7e7e1;
 
   /* Text */
-  --color-text-primary: #15160F;
-  --color-text-secondary: #63645C;
-  --color-text-inverse: #FFFFFF;
+  --raw-text-primary: #15160f;
+  --raw-text-secondary: #63645c;
+  --raw-text-inverse: #ffffff;
 
   /* Accent - Lime */
-  --color-accent: #C7F536;
-  --color-accent-hover: #AEDA22;
-  --color-accent-dark: #7D9E18;
-  --color-accent-soft: #EEFAC8;
-  --color-accent-text: #15160F;
-  --color-accent-glow: 199, 245, 54;
+  --raw-accent: #c7f536;
+  --raw-accent-hover: #aeda22;
+  --raw-accent-dark: #7d9e18;
+  --raw-accent-soft: #eefac8;
+  --raw-accent-text: #15160f;
+  --raw-accent-glow: 199, 245, 54;
 
   /* Status */
-  --color-success: #2E7D32;
-  --color-error: #D32F2F;
-  --color-warning: #ED6C02;
+  --raw-success: #2e7d32;
+  --raw-error: #d32f2f;
+  --raw-warning: #ed6c02;
 
   /* Shadows (rgb triplets, composed with alpha in box-shadow) */
-  --shadow-ink: 21, 22, 15;
+  --raw-shadow-ink: 21, 22, 15;
 
   /* Dark mode-ready */
-  --color-dark-bg: #121212;
-  --color-dark-surface: #1E1E1E;
+  --raw-dark-bg: #121212;
+  --raw-dark-surface: #1e1e1e;
 }
 
-* {
-  border-color: var(--color-border);
-}
+@theme {
+  --color-bg: var(--raw-bg);
+  --color-bg-alt: var(--raw-bg-alt);
+  --color-surface: var(--raw-surface);
+  --color-border: var(--raw-border);
+  --color-primary: var(--raw-text-primary);
+  --color-secondary: var(--raw-text-secondary);
+  --color-inverse: var(--raw-text-inverse);
+  --color-accent: var(--raw-accent);
+  --color-accent-hover: var(--raw-accent-hover);
+  --color-accent-dark: var(--raw-accent-dark);
+  --color-accent-soft: var(--raw-accent-soft);
+  --color-accent-text: var(--raw-accent-text);
+  --color-success: var(--raw-success);
+  --color-error: var(--raw-error);
+  --color-warning: var(--raw-warning);
+  --color-dark-bg: var(--raw-dark-bg);
+  --color-dark-surface: var(--raw-dark-surface);
 
-html {
-  scroll-behavior: smooth;
-}
+  --font-sans: var(--font-inter), system-ui, sans-serif;
 
-body {
-  color: var(--color-text-primary);
-  background: var(--color-bg);
-}
+  --text-hero: 48px;
+  --text-hero--line-height: 1.1;
+  --text-hero--font-weight: 700;
+  --text-hero-lg: 64px;
+  --text-hero-lg--line-height: 1.1;
+  --text-hero-lg--font-weight: 700;
+  --text-hero-sm: 32px;
+  --text-hero-sm--line-height: 1.15;
+  --text-hero-sm--font-weight: 700;
+  --text-section: 28px;
+  --text-section--line-height: 1.25;
+  --text-section--font-weight: 700;
+  --text-section-lg: 36px;
+  --text-section-lg--line-height: 1.25;
+  --text-section-lg--font-weight: 700;
+  --text-meta: 13px;
+  --text-meta--line-height: 1.5;
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  --animate-fade-in: fade-in 0.2s ease-out;
+
+  --shadow-card:
+    0 1px 2px rgba(var(--raw-shadow-ink), 0.04),
+    0 1px 1px rgba(var(--raw-shadow-ink), 0.03);
+  --shadow-card-hover:
+    0 16px 32px -12px rgba(var(--raw-shadow-ink), 0.16),
+    0 4px 8px -2px rgba(var(--raw-shadow-ink), 0.06);
+  --shadow-glow: 0 8px 24px -6px rgba(var(--raw-accent-glow), 0.45);
+  --shadow-glow-sm: 0 4px 14px -4px rgba(var(--raw-accent-glow), 0.4);
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
-@layer components {
-  .container-page {
-    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-border);
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    color: var(--color-primary);
+    background: var(--color-bg);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility container-page {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
 }
 
 /* Skeleton shimmer */

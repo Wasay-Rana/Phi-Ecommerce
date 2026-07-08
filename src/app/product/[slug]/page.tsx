@@ -8,6 +8,7 @@ import { ProductTabs } from "@/components/product/ProductTabs";
 import { RelatedProducts } from "@/components/product/RelatedProducts";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { formatPrice } from "@/lib/utils";
+import { siteConfig } from "@/lib/config";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -22,7 +23,7 @@ export async function generateMetadata({
   const product = getProductBySlug(slug);
   if (!product) return {};
   return {
-    title: `${product.name} — Phi`,
+    title: `${product.name} — ${siteConfig.name}`,
     description: product.tagline,
   };
 }

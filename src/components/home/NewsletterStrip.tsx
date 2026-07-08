@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Mail, MessageCircle } from "lucide-react";
-import { whatsappLink } from "@/lib/config";
+import { siteConfig, whatsappLink } from "@/lib/config";
 
 export function NewsletterStrip() {
   const [email, setEmail] = useState("");
@@ -38,7 +38,7 @@ export function NewsletterStrip() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
-                  className="w-full rounded-full border border-transparent bg-surface py-3 pl-10 pr-4 text-sm text-primary outline-none ring-accent focus:ring-2"
+                  className="w-full rounded-full border border-transparent bg-surface py-3 pl-10 pr-4 text-sm text-primary outline-hidden ring-accent focus:ring-2"
                 />
               </div>
               <button
@@ -51,7 +51,7 @@ export function NewsletterStrip() {
           )}
 
           <a
-            href={whatsappLink("Hi! I'd like to know more about Phi products.")}
+            href={whatsappLink(`Hi! I'd like to know more about ${siteConfig.name} products.`)}
             target="_blank"
             rel="noreferrer"
             className="flex items-center justify-center gap-2 rounded-full border border-inverse/20 px-5 py-3 text-sm font-semibold text-inverse transition-colors hover:bg-inverse/10"

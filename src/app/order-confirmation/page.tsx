@@ -1,17 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, AlertTriangle, Phone, Package, Home } from "lucide-react";
 import { useOrderStore } from "@/store/order";
 import { formatPrice } from "@/lib/utils";
+import { useHasMounted } from "@/lib/useHasMounted";
 import { whatsappLink } from "@/lib/config";
 
 export default function OrderConfirmationPage() {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useHasMounted();
   const lastOrder = useOrderStore((s) => s.lastOrder);
-
-  useEffect(() => setMounted(true), []);
 
   if (!mounted) return null;
 

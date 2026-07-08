@@ -47,14 +47,14 @@ export function ProductImage({
     <div
       style={style}
       className={cn(
-        "relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-bg-alt via-bg-alt to-accent-soft",
+        "relative flex items-center justify-center overflow-hidden bg-linear-to-br from-bg-alt via-bg-alt to-accent-soft",
         className
       )}
     >
       <div className="absolute -right-8 -top-10 h-32 w-32 rounded-full bg-accent/40 blur-3xl" />
       <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-accent-dark/15 blur-3xl" />
-      <div className="absolute inset-0 ring-1 ring-inset ring-black/[0.03]" />
-      <div className="relative flex aspect-square w-[64%] items-center justify-center rounded-full bg-surface/70 shadow-card backdrop-blur-sm">
+      <div className="absolute inset-0 ring-1 ring-inset ring-black/3" />
+      <div className="relative flex aspect-square w-[64%] items-center justify-center rounded-full bg-surface/70 shadow-card backdrop-blur-xs">
         <Icon
           className={cn("text-primary/75", tilt, iconClassName)}
           strokeWidth={1.25}
