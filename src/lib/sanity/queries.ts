@@ -16,7 +16,7 @@ const PRODUCT_PROJECTION = `{
   compareAtPrice,
   category,
   badges,
-  images[]{ _key, asset, hotspot, alt },
+  images[defined(asset._ref)]{ _key, asset, hotspot, alt },
   colorVariants,
   rating,
   reviewCount,
