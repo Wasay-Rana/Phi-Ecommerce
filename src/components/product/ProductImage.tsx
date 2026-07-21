@@ -1,16 +1,37 @@
 import Image from "next/image";
-import { ProductCategory } from "@/types/product";
 import { cn } from "@/lib/utils";
+import { sanityLoader, urlFor } from "@/lib/sanity/image";
+import type { SanityImage } from "@/types/sanity";
 
 interface ProductImageProps {
-  category: ProductCategory;
+  images?: SanityImage[];
+  imageUrl?: string;
   className?: string;
   iconClassName?: string;
   variantIndex?: number;
+  alt?: string;
   style?: React.CSSProperties;
 }
 
-export function ProductImage({ className, style }: ProductImageProps) {
+export function ProductImage({ images, imageUrl, variantIndex = 0, alt, className, style }: ProductImageProps) {
+  const image = images?.[variantIndex];
+  const src = imageUrl ?? (image ? urlFor(image).url() : undefined);
+
+  if (src) {
+    return (
+      <div style={style} className={cn("relative overflow-hidden", className)}>
+        <Image
+          loader={sanityLoader}
+          src={src}
+          alt={alt ?? image?.alt ?? "Product photo"}
+          fill
+          sizes="(min-width: 1024px) 320px, 50vw"
+          className="object-cover"
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       style={style}

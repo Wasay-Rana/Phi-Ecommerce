@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { Star, ShieldCheck, Truck } from "lucide-react";
-import { categoryLabels, getProductBySlug, getRelatedProducts, niches, nicheOf, products } from "@/data/products";
+import { categoryLabels, niches, nicheOf } from "@/data/taxonomy";
+import { getAllProducts, getProductBySlug, getRelatedProducts } from "@/lib/sanity/queries";
+import { urlFor } from "@/lib/sanity/image";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { AddToCartPanel } from "@/components/product/AddToCartPanel";
 import { ProductTabs } from "@/components/product/ProductTabs";
@@ -10,7 +12,8 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { formatPrice } from "@/lib/utils";
 import { siteConfig } from "@/lib/config";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const products = await getAllProducts();
   return products.map((p) => ({ slug: p.slug }));
 }
 
@@ -20,7 +23,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   if (!product) return {};
   return {
     title: `${product.name} — ${siteConfig.name}`,
@@ -30,10 +33,10 @@ export async function generateMetadata({
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   if (!product) notFound();
 
-  const related = getRelatedProducts(product);
+  const related = await getRelatedProducts(product);
   const niche = niches.find((n) => n.id === nicheOf[product.category]);
 
   const productJsonLd = {
@@ -42,6 +45,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     name: product.name,
     description: product.description,
     sku: product.slug,
+    image: product.images[0] ? urlFor(product.images[0]).width(1200).url() : undefined,
     brand: { "@type": "Brand", name: siteConfig.name },
     aggregateRating: product.reviewCount > 0
       ? {
@@ -81,7 +85,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           />
         </div>
         <div className="grid gap-10 md:grid-cols-2">
-          <ProductGallery category={product.category} images={product.images} />
+          <ProductGallery images={product.images} alt={product.name} />
 
           <div className="flex flex-col gap-5">
             <div>

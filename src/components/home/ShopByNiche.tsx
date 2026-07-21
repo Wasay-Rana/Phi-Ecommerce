@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { ArrowUpRight, Cpu, FlaskConical } from "lucide-react";
-import { niches, getProductsByNiche } from "@/data/products";
+import { niches, nicheOf } from "@/data/taxonomy";
+import { getAllProducts } from "@/lib/sanity/queries";
 
 const nicheIcon = { tech: Cpu, stem: FlaskConical } as const;
 
-export function ShopByNiche() {
+export async function ShopByNiche() {
+  const products = await getAllProducts();
   return (
     <section className="container-page py-16">
       <div className="mb-8">
@@ -15,7 +17,7 @@ export function ShopByNiche() {
       <div className="grid gap-5 sm:grid-cols-2">
         {niches.map((niche) => {
           const Icon = nicheIcon[niche.id];
-          const count = getProductsByNiche(niche.id).length;
+          const count = products.filter((p) => nicheOf[p.category] === niche.id).length;
           return (
             <Link
               key={niche.id}

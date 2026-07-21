@@ -1,3 +1,5 @@
+import { SanityImage } from "./sanity";
+
 export type Niche = "tech" | "stem";
 
 export type ProductCategory =
@@ -31,7 +33,7 @@ export interface Product {
   compareAtPrice?: number;
   category: ProductCategory;
   badges?: ProductBadge[];
-  images: string[];
+  images: SanityImage[];
   colorVariants?: ProductVariant[];
   rating: number;
   reviewCount: number;
@@ -43,6 +45,7 @@ export interface CartLineItem {
   name: string;
   price: number;
   image: string;
+  category: ProductCategory;
   variant?: string;
   quantity: number;
 }

@@ -6,12 +6,14 @@ import { ShopByNiche } from "@/components/home/ShopByNiche";
 import { Testimonials } from "@/components/home/Testimonials";
 import { NewsletterStrip } from "@/components/home/NewsletterStrip";
 import { ProductGrid } from "@/components/product/ProductGrid";
-import { products, niches, getProductsByNiche } from "@/data/products";
+import { niches, nicheOf } from "@/data/taxonomy";
+import { getAllProducts } from "@/lib/sanity/queries";
 
-export default function Home() {
+export default async function Home() {
+  const products = await getAllProducts();
   const featuredProducts = niches.flatMap((niche) =>
-    getProductsByNiche(niche.id)
-      .filter((p) => p.badges?.includes("bestseller"))
+    products
+      .filter((p) => nicheOf[p.category] === niche.id && p.badges?.includes("bestseller"))
       .slice(0, 2)
   );
   if (featuredProducts.length < 4) {

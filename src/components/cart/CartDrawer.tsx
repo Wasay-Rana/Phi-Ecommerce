@@ -5,7 +5,6 @@ import { X, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { useCartStore, cartSubtotal } from "@/store/cart";
 import { formatPrice } from "@/lib/utils";
 import { ProductImage } from "@/components/product/ProductImage";
-import { getProductBySlug } from "@/data/products";
 
 export function CartDrawer() {
   const isOpen = useCartStore((s) => s.isDrawerOpen);
@@ -55,11 +54,11 @@ export function CartDrawer() {
             <div className="flex-1 overflow-y-auto p-4">
               <ul className="flex flex-col gap-4">
                 {items.map((item) => {
-                  const product = getProductBySlug(item.slug);
                   return (
                     <li key={`${item.slug}-${item.variant ?? ""}`} className="flex gap-3">
                       <ProductImage
-                        category={product?.category ?? "phone-accessories"}
+                        imageUrl={item.image}
+                        alt={item.name}
                         className="h-20 w-20 shrink-0 rounded-xl"
                         iconClassName="h-8 w-8"
                       />

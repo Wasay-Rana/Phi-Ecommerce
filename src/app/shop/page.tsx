@@ -3,13 +3,15 @@ import { Metadata } from "next";
 import { ShopPageClient } from "./ShopPageClient";
 import { ProductGridSkeleton } from "@/components/product/ProductGridSkeleton";
 import { siteConfig } from "@/lib/config";
+import { getAllProducts } from "@/lib/sanity/queries";
 
 export const metadata: Metadata = {
   title: `Shop — ${siteConfig.name}`,
   description: `Browse ${siteConfig.name}'s full range of tech and STEM/maker products.`,
 };
 
-export default function ShopPage() {
+export default async function ShopPage() {
+  const products = await getAllProducts();
   return (
     <Suspense
       fallback={
@@ -18,7 +20,7 @@ export default function ShopPage() {
         </div>
       }
     >
-      <ShopPageClient />
+      <ShopPageClient products={products} />
     </Suspense>
   );
 }

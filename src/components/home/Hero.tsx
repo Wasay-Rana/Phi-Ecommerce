@@ -49,7 +49,6 @@ export function Hero() {
 
         <div className="relative">
           <ProductImage
-            category="audio"
             className="aspect-square w-full rounded-4xl shadow-card-hover"
             iconClassName="h-32 w-32 sm:h-40 sm:w-40"
           />

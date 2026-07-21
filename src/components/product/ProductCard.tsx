@@ -6,6 +6,7 @@ import { Product } from "@/types/product";
 import { ProductImage } from "@/components/product/ProductImage";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store/cart";
+import { urlFor } from "@/lib/sanity/image";
 
 const badgeStyles: Record<string, string> = {
   new: "bg-surface text-accent-text",
@@ -38,7 +39,8 @@ export function ProductCard({ product }: { product: Product }) {
     <div className="group flex flex-col overflow-hidden rounded-3xl bg-surface shadow-card ring-1 ring-border transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover hover:ring-transparent">
       <Link href={`/product/${product.slug}`} className="relative block overflow-hidden">
         <ProductImage
-          category={product.category}
+          images={product.images}
+          alt={product.name}
           className="aspect-square w-full transition-transform duration-500 ease-out group-hover:scale-[1.06]"
           iconClassName="h-16 w-16"
         />
@@ -93,7 +95,8 @@ export function ProductCard({ product }: { product: Product }) {
                 slug: product.slug,
                 name: product.name,
                 price: product.price,
-                image: product.images[0] ?? "1",
+                image: product.images[0] ? urlFor(product.images[0]).width(200).url() : "",
+                category: product.category,
                 quantity: 1,
               })
             }

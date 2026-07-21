@@ -6,6 +6,7 @@ import { Product } from "@/types/product";
 import { QuantitySelector } from "@/components/product/QuantitySelector";
 import { useCartStore } from "@/store/cart";
 import { cn } from "@/lib/utils";
+import { urlFor } from "@/lib/sanity/image";
 
 export function AddToCartPanel({ product }: { product: Product }) {
   const [variant, setVariant] = useState(product.colorVariants?.[0]?.id);
@@ -20,7 +21,8 @@ export function AddToCartPanel({ product }: { product: Product }) {
       slug: product.slug,
       name: product.name,
       price: product.price,
-      image: product.images[0] ?? "1",
+      image: product.images[0] ? urlFor(product.images[0]).width(200).url() : "",
+      category: product.category,
       variant: selectedVariantLabel,
       quantity,
     });

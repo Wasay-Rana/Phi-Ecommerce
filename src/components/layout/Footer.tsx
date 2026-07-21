@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Music2, Truck, ShieldCheck } from "lucide-react";
 import { InstagramIcon, FacebookIcon } from "@/components/icons/SocialIcons";
 import { siteConfig } from "@/lib/config";
-import { categoriesByNiche, categoryLabels, niches } from "@/data/products";
+import { categoriesByNiche, categoryLabels, niches } from "@/data/taxonomy";
 
 export function Footer() {
   return (

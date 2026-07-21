@@ -1,8 +1,10 @@
 import { MetadataRoute } from "next";
-import { products } from "@/data/products";
+import { getAllProducts } from "@/lib/sanity/queries";
 import { siteConfig } from "@/lib/config";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const products = await getAllProducts();
+
   const staticRoutes = ["", "/shop"].map((path) => ({
     url: `${siteConfig.siteUrl}${path}`,
     lastModified: new Date(),

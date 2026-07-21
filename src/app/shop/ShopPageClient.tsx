@@ -3,8 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { SlidersHorizontal, X } from "lucide-react";
-import { products, niches, categoryLabels, nicheOf } from "@/data/products";
-import { Niche, ProductCategory } from "@/types/product";
+import { niches, categoryLabels, nicheOf } from "@/data/taxonomy";
+import { Niche, Product, ProductCategory } from "@/types/product";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { ProductGridSkeleton } from "@/components/product/ProductGridSkeleton";
 import { ShopFilters, PRICE_MAX } from "@/components/shop/ShopFilters";
@@ -21,7 +21,7 @@ function deriveFiltersFromParams(searchParams: URLSearchParams) {
   };
 }
 
-export function ShopPageClient() {
+export function ShopPageClient({ products }: { products: Product[] }) {
   const searchParams = useSearchParams();
   const searchParamsKey = searchParams.toString();
   const initialFilters = deriveFiltersFromParams(searchParams);
@@ -101,7 +101,7 @@ export function ShopPageClient() {
         list = [...list].sort((a, b) => Number(!!b.badges?.length) - Number(!!a.badges?.length));
     }
     return list;
-  }, [activeNiche, selectedCategories, maxPrice, sort, searchQuery]);
+  }, [products, activeNiche, selectedCategories, maxPrice, sort, searchQuery]);
 
   const filterProps = {
     activeNiche,

@@ -1,7 +1,7 @@
 "use client";
 
 import { Niche, ProductCategory } from "@/types/product";
-import { categoriesByNiche, categoryLabels, niches } from "@/data/products";
+import { categoriesByNiche, categoryLabels, niches } from "@/data/taxonomy";
 import { formatPrice } from "@/lib/utils";
 
 export const PRICE_MAX = 12000;

@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Menu, X, ShoppingBag, ChevronDown, Search, Cpu, FlaskConical, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/config";
 import { useCartStore, cartCount } from "@/store/cart";
-import { categoriesByNiche, categoryLabels, niches } from "@/data/products";
+import { categoriesByNiche, categoryLabels, niches } from "@/data/taxonomy";
 
 const nicheIcon = { tech: Cpu, stem: FlaskConical } as const;
 

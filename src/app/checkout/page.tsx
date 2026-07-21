@@ -9,7 +9,6 @@ import { sendOrderEmail } from "@/lib/emailjs";
 import { formatPrice } from "@/lib/utils";
 import { useHasMounted } from "@/lib/useHasMounted";
 import { siteConfig } from "@/lib/config";
-import { getProductBySlug } from "@/data/products";
 import { ProductImage } from "@/components/product/ProductImage";
 
 interface FormState {
@@ -225,11 +224,11 @@ export default function CheckoutPage() {
           <h2 className="mb-4 font-semibold text-primary">Order Summary</h2>
           <ul className="flex flex-col gap-4">
             {items.map((item) => {
-              const product = getProductBySlug(item.slug);
               return (
                 <li key={`${item.slug}-${item.variant ?? ""}`} className="flex items-center gap-3">
                   <ProductImage
-                    category={product?.category ?? "phone-accessories"}
+                    imageUrl={item.image}
+                    alt={item.name}
                     className="h-14 w-14 shrink-0 rounded-lg"
                     iconClassName="h-6 w-6"
                   />

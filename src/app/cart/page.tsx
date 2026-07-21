@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from "lucide-react";
 import { useCartStore, cartSubtotal } from "@/store/cart";
-import { getProductBySlug } from "@/data/products";
 import { formatPrice } from "@/lib/utils";
 import { useHasMounted } from "@/lib/useHasMounted";
 import { ProductImage } from "@/components/product/ProductImage";
@@ -53,11 +52,11 @@ export default function CartPage() {
       <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
         <ul className="flex flex-col divide-y divide-border">
           {items.map((item) => {
-            const product = getProductBySlug(item.slug);
             return (
               <li key={`${item.slug}-${item.variant ?? ""}`} className="flex gap-4 py-5">
                 <ProductImage
-                  category={product?.category ?? "phone-accessories"}
+                  imageUrl={item.image}
+                  alt={item.name}
                   className="h-24 w-24 shrink-0 rounded-xl"
                   iconClassName="h-9 w-9"
                 />
